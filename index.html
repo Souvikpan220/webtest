@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #ffd6e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+  }
+
+  .card {
+    background: #ffeaf3;
+    width: 320px;
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+  }
+
+  .panda {
+    width: 140px;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 22px;
+    color: #ff4d88;
+    margin-bottom: 20px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+  }
+
+  button {
+    border: none;
+    padding: 10px 22px;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .yes {
+    background: #ff4d88;
+    color: white;
+  }
+
+  .yes:hover {
+    transform: scale(1.1);
+  }
+
+  .no {
+    background: #bdbdbd;
+    color: white;
+    position: absolute;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <!-- Panda Image -->
+  <img class="panda" src="https://i.imgur.com/0WzKZpY.png" alt="Cute Panda">
+
+  <h1>Are you free? 🥺💗</h1>
+
+  <div class="buttons">
+    <button class="yes" onclick="yesClicked()">Yes 💕</button>
+    <button class="no" id="noBtn">No 😭</button>
+  </div>
+</div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+
+  noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 80 - 40;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  });
+
+  function yesClicked() {
+    document.body.innerHTML = `
+      <div style="
+        background:#ffd6e8;
+        height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-family:Comic Sans MS;
+        text-align:center;
+      ">
+        <div>
+          <h1 style="color:#ff4d88;">YAYYY 💖🥰</h1>
+          <p>You just made my Valentine special 🐼💕</p>
+        </div>
+      </div>
+    `;
+  }
+</script>
+
+</body>
+</html>
