@@ -162,11 +162,11 @@ button {
   alt="Cute hearts"
   class="top-gif"
 />
-  <h1 id="title">Are you free? 🥺💗</h1>
+  <h1 id="title">Are you free? </h1>
 
   <div class="buttons" id="buttons">
-    <button class="yes" onclick="showGifts()">Yes 💕</button>
-    <button class="no" onclick="openNoModal()">No 😭</button>
+    <button class="yes" onclick="showGifts()">haa 🤧</button>
+    <button class="no" onclick="openNoModal()">nahh 😤</button>
   </div>
 
   <!-- Gift Area -->
@@ -174,7 +174,7 @@ button {
     <h1>Select any one 🎀</h1>
     <div class="gift-boxes">
       <div class="gift" onclick="chooseGift('Chocolate 🍫', this)">🎁</div>
-      <div class="gift" onclick="chooseGift('Flowers 💐', this)">🎁</div>
+      <div class="gift" onclick="chooseGift('flowers 💐', this)">🎁</div>
     </div>
     <div class="reveal" id="reveal"></div>
   </div>
@@ -201,7 +201,7 @@ setInterval(() => {
 /* YES clicked */
 function showGifts() {
   document.getElementById("buttons").remove();
-  document.getElementById("title").innerText = "Yayyy 💖";
+  document.getElementById("title").innerText = "good 😒";
   document.getElementById("gifts").style.display = "block";
 }
 
@@ -214,7 +214,7 @@ function chooseGift(type, element) {
     if (g !== element) g.classList.add("disabled");
   });
 
-  element.innerText = type.includes("Chocolate") ? "🍫" : "💐";
+  element.innerText = type.includes("chocolate") ? "🍫" : "💐";
   document.getElementById("reveal").innerText = `You chose ${type}`;
 
   sendToDiscord(type);
@@ -248,8 +248,8 @@ function closeNoModal() {
 
 <div class="modal" id="noModal">
   <div class="modal-box">
-    <p>test</p>
-    <button class="close" onclick="closeNoModal()">Okay</button>
+    <p>no is not an option babu....jao chup chap onno option ta select koro 😒😒</p>
+    <button class="close" onclick="closeNoModal()">close</button>
   </div>
 </div>
 
