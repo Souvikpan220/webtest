@@ -9,11 +9,32 @@
   body {
     margin: 0;
     height: 100vh;
-    background: #ffd6e8;
+    background: linear-gradient(180deg, #ffd6e8, #ffeaf3);
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+  }
+
+  /* Floating background items */
+  .float {
+    position: absolute;
+    bottom: -100px;
+    animation: floatUp linear infinite;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(0) scale(0.8);
+      opacity: 0.9;
+    }
+    to {
+      transform: translateY(-120vh) scale(1.2);
+      opacity: 0;
+    }
   }
 
   .card {
@@ -23,6 +44,7 @@
     border-radius: 18px;
     text-align: center;
     box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
+    z-index: 10;
   }
 
   .panda {
@@ -71,10 +93,9 @@
 
 <body>
 
+<!-- Valentine Card -->
 <div class="card">
-  <!-- Panda Image -->
   <img class="panda" src="https://i.imgur.com/0WzKZpY.png" alt="Cute Panda">
-
   <h1>Are you free? 🥺💗</h1>
 
   <div class="buttons">
@@ -84,18 +105,39 @@
 </div>
 
 <script>
+  /* NO button dodge */
   const noBtn = document.getElementById("noBtn");
-
   noBtn.addEventListener("mouseover", () => {
     const x = Math.random() * 200 - 100;
     const y = Math.random() * 80 - 40;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
 
+  /* Floating items */
+  const images = [
+    "💖", "💗", "💞", "🐼", "🧸"
+  ];
+
+  function createFloat() {
+    const span = document.createElement("span");
+    span.className = "float";
+    span.innerText = images[Math.floor(Math.random() * images.length)];
+    span.style.left = Math.random() * 100 + "vw";
+    span.style.fontSize = Math.random() * 25 + 20 + "px";
+    span.style.animationDuration = Math.random() * 5 + 6 + "s";
+
+    document.body.appendChild(span);
+
+    setTimeout(() => span.remove(), 12000);
+  }
+
+  setInterval(createFloat, 400);
+
+  /* YES click */
   function yesClicked() {
     document.body.innerHTML = `
       <div style="
-        background:#ffd6e8;
+        background:linear-gradient(180deg,#ffd6e8,#ffeaf3);
         height:100vh;
         display:flex;
         align-items:center;
@@ -105,7 +147,7 @@
       ">
         <div>
           <h1 style="color:#ff4d88;">YAYYY 💖🥰</h1>
-          <p>You just made my Valentine special 🐼💕</p>
+          <p>You just made my Valentine special 🐼💘</p>
         </div>
       </div>
     `;
