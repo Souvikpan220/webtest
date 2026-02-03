@@ -104,17 +104,69 @@ button {
   margin-top: 15px;
   color: #ff4d88;
 }
+.top-gif {
+  width: 90px;
+  margin: 0 auto 12px;
+  display: block;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal-box {
+  background: #fff0f6;
+  padding: 22px 26px;
+  border-radius: 16px;
+  width: 260px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  animation: pop 0.25s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-box p {
+  color: #ff4d88;
+  font-size: 16px;
+  margin-bottom: 18px;
+}
+
+.close {
+  background: #ff4d88;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+  
 </style>
 </head>
 
 <body>
 
 <div class="card" id="card">
+  <img 
+  src="https://i.pinimg.com/originals/d8/17/fb/d817fb4583391600587c4e817460ed84.gif"
+  alt="Cute hearts"
+  class="top-gif"
+/>
   <h1 id="title">Are you free? 🥺💗</h1>
 
   <div class="buttons" id="buttons">
     <button class="yes" onclick="showGifts()">Yes 💕</button>
-    <button class="no" onclick="openModal()">No 😭</button>
+    <button class="no" onclick="openNoModal()">No 😭</button>
   </div>
 
   <!-- Gift Area -->
@@ -183,7 +235,24 @@ function sendToDiscord(choice) {
 function openModal() {
   alert("test");
 }
+
+function openNoModal() {
+  document.getElementById("noModal").style.display = "flex";
+}
+
+function closeNoModal() {
+  document.getElementById("noModal").style.display = "none";
+}
+
 </script>
+
+<div class="modal" id="noModal">
+  <div class="modal-box">
+    <p>test</p>
+    <button class="close" onclick="closeNoModal()">Okay</button>
+  </div>
+</div>
+
 
 </body>
 </html>
