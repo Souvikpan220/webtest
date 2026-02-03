@@ -14,13 +14,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Comic Sans MS', 'Poppins', sans-serif;
+    font-family: 'Poppins', 'Comic Sans MS', sans-serif;
   }
 
   /* Floating background items */
   .float {
     position: absolute;
-    bottom: -100px;
+    bottom: -80px;
     animation: floatUp linear infinite;
     opacity: 0.9;
     pointer-events: none;
@@ -61,15 +61,14 @@
   .buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    position: relative;
+    gap: 18px;
   }
 
   button {
     border: none;
-    padding: 10px 22px;
+    padding: 10px 24px;
     font-size: 16px;
-    border-radius: 20px;
+    border-radius: 22px;
     cursor: pointer;
     transition: 0.2s;
   }
@@ -80,13 +79,53 @@
   }
 
   .yes:hover {
-    transform: scale(1.1);
+    transform: scale(1.08);
   }
 
   .no {
-    background: #bdbdbd;
+    background: #ffc1d6;
+    color: #ff4d88;
+  }
+
+  /* Modal popup */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+  }
+
+  .modal-box {
+    background: #fff0f6;
+    padding: 22px 26px;
+    border-radius: 16px;
+    width: 260px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    animation: pop 0.25s ease;
+  }
+
+  @keyframes pop {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .modal-box p {
+    color: #ff4d88;
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+
+  .close {
+    background: #ff4d88;
     color: white;
-    position: absolute;
+    padding: 8px 18px;
+    border-radius: 18px;
+    border: none;
+    cursor: pointer;
   }
 </style>
 </head>
@@ -100,40 +139,45 @@
 
   <div class="buttons">
     <button class="yes" onclick="yesClicked()">Yes 💕</button>
-    <button class="no" id="noBtn">No 😭</button>
+    <button class="no" onclick="openModal()">No 😭</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <p>test</p>
+    <button class="close" onclick="closeModal()">Okay</button>
   </div>
 </div>
 
 <script>
-  /* NO button dodge */
-  const noBtn = document.getElementById("noBtn");
-  noBtn.addEventListener("mouseover", () => {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 80 - 40;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-  });
-
-  /* Floating items */
-  const images = [
-    "💖", "💗", "💞", "🐼", "🧸"
-  ];
+  /* Floating emojis */
+  const items = ["💖","💗","💞","🐼","🧸"];
 
   function createFloat() {
     const span = document.createElement("span");
     span.className = "float";
-    span.innerText = images[Math.floor(Math.random() * images.length)];
+    span.innerText = items[Math.floor(Math.random() * items.length)];
     span.style.left = Math.random() * 100 + "vw";
-    span.style.fontSize = Math.random() * 25 + 20 + "px";
+    span.style.fontSize = Math.random() * 28 + 18 + "px";
     span.style.animationDuration = Math.random() * 5 + 6 + "s";
-
     document.body.appendChild(span);
-
     setTimeout(() => span.remove(), 12000);
   }
 
-  setInterval(createFloat, 400);
+  setInterval(createFloat, 450);
 
-  /* YES click */
+  /* Modal control */
+  function openModal() {
+    document.getElementById("modal").style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  /* YES action */
   function yesClicked() {
     document.body.innerHTML = `
       <div style="
@@ -142,7 +186,7 @@
         display:flex;
         align-items:center;
         justify-content:center;
-        font-family:Comic Sans MS;
+        font-family:Poppins;
         text-align:center;
       ">
         <div>
