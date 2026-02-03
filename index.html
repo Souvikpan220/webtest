@@ -6,196 +6,183 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(180deg, #ffd6e8, #ffeaf3);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', 'Comic Sans MS', sans-serif;
-  }
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(180deg, #ffd6e8, #ffeaf3);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Poppins, sans-serif;
+}
 
-  /* Floating background items */
-  .float {
-    position: absolute;
-    bottom: -80px;
-    animation: floatUp linear infinite;
-    opacity: 0.9;
-    pointer-events: none;
-  }
+.float {
+  position: absolute;
+  bottom: -80px;
+  animation: floatUp linear infinite;
+  pointer-events: none;
+}
 
-  @keyframes floatUp {
-    from {
-      transform: translateY(0) scale(0.8);
-      opacity: 0.9;
-    }
-    to {
-      transform: translateY(-120vh) scale(1.2);
-      opacity: 0;
-    }
+@keyframes floatUp {
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
   }
+}
 
-  .card {
-    background: #ffeaf3;
-    width: 320px;
-    padding: 25px;
-    border-radius: 18px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.3);
-    z-index: 10;
-  }
+.card {
+  background: #ffeaf3;
+  width: 320px;
+  padding: 25px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(255,105,180,0.3);
+  z-index: 5;
+}
 
-  .panda {
-    width: 140px;
-    margin-bottom: 10px;
-  }
+h1 {
+  color: #ff4d88;
+  font-size: 22px;
+}
 
-  h1 {
-    font-size: 22px;
-    color: #ff4d88;
-    margin-bottom: 20px;
-  }
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 20px;
+}
 
-  .buttons {
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-  }
+button {
+  border: none;
+  padding: 10px 24px;
+  border-radius: 22px;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-  button {
-    border: none;
-    padding: 10px 24px;
-    font-size: 16px;
-    border-radius: 22px;
-    cursor: pointer;
-    transition: 0.2s;
-  }
+.yes {
+  background: #ff4d88;
+  color: white;
+}
 
-  .yes {
-    background: #ff4d88;
-    color: white;
-  }
+.no {
+  background: #ffc1d6;
+  color: #ff4d88;
+}
 
-  .yes:hover {
-    transform: scale(1.08);
-  }
+/* Gift section */
+.gifts {
+  display: none;
+  margin-top: 20px;
+}
 
-  .no {
-    background: #ffc1d6;
-    color: #ff4d88;
-  }
+.gift-boxes {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 15px;
+}
 
-  /* Modal popup */
-  .modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.35);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 50;
-  }
+.gift {
+  font-size: 60px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
 
-  .modal-box {
-    background: #fff0f6;
-    padding: 22px 26px;
-    border-radius: 16px;
-    width: 260px;
-    text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-    animation: pop 0.25s ease;
-  }
+.gift:hover {
+  transform: scale(1.1);
+}
 
-  @keyframes pop {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
 
-  .modal-box p {
-    color: #ff4d88;
-    font-size: 16px;
-    margin-bottom: 18px;
-  }
-
-  .close {
-    background: #ff4d88;
-    color: white;
-    padding: 8px 18px;
-    border-radius: 18px;
-    border: none;
-    cursor: pointer;
-  }
+.reveal {
+  font-size: 20px;
+  margin-top: 15px;
+  color: #ff4d88;
+}
 </style>
 </head>
 
 <body>
 
-<!-- Valentine Card -->
-<div class="card">
-  <img class="panda" src="https://i.pinimg.com/originals/d8/17/fb/d817fb4583391600587c4e817460ed84.gif" alt="Cute Panda">
-  <h1>Are you free? 🥺💗</h1>
+<div class="card" id="card">
+  <h1 id="title">Are you free? 🥺💗</h1>
 
-  <div class="buttons">
-    <button class="yes" onclick="yesClicked()">Yes 💕</button>
+  <div class="buttons" id="buttons">
+    <button class="yes" onclick="showGifts()">Yes 💕</button>
     <button class="no" onclick="openModal()">No 😭</button>
   </div>
-</div>
 
-<!-- Modal -->
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <p>test</p>
-    <button class="close" onclick="closeModal()">Okay</button>
+  <!-- Gift Area -->
+  <div class="gifts" id="gifts">
+    <h1>Select any one 🎀</h1>
+    <div class="gift-boxes">
+      <div class="gift" onclick="chooseGift('Chocolate 🍫', this)">🎁</div>
+      <div class="gift" onclick="chooseGift('Flowers 💐', this)">🎁</div>
+    </div>
+    <div class="reveal" id="reveal"></div>
   </div>
 </div>
 
 <script>
-  /* Floating emojis */
-  const items = ["💖","💗","💞","🐼","🧸"];
+/* DISCORD WEBHOOK */
+const WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL";
+let chosen = false;
 
-  function createFloat() {
-    const span = document.createElement("span");
-    span.className = "float";
-    span.innerText = items[Math.floor(Math.random() * items.length)];
-    span.style.left = Math.random() * 100 + "vw";
-    span.style.fontSize = Math.random() * 28 + 18 + "px";
-    span.style.animationDuration = Math.random() * 5 + 6 + "s";
-    document.body.appendChild(span);
-    setTimeout(() => span.remove(), 12000);
-  }
+/* Floating emojis */
+const items = ["💖","💗","💞","🐼","🧸"];
+setInterval(() => {
+  const s = document.createElement("span");
+  s.className = "float";
+  s.innerText = items[Math.floor(Math.random()*items.length)];
+  s.style.left = Math.random()*100 + "vw";
+  s.style.fontSize = Math.random()*28 + 18 + "px";
+  s.style.animationDuration = Math.random()*5 + 6 + "s";
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 12000);
+}, 450);
 
-  setInterval(createFloat, 450);
+/* YES clicked */
+function showGifts() {
+  document.getElementById("buttons").remove();
+  document.getElementById("title").innerText = "Yayyy 💖";
+  document.getElementById("gifts").style.display = "block";
+}
 
-  /* Modal control */
-  function openModal() {
-    document.getElementById("modal").style.display = "flex";
-  }
+/* Gift selection */
+function chooseGift(type, element) {
+  if (chosen) return;
+  chosen = true;
 
-  function closeModal() {
-    document.getElementById("modal").style.display = "none";
-  }
+  document.querySelectorAll(".gift").forEach(g => {
+    if (g !== element) g.classList.add("disabled");
+  });
 
-  /* YES action */
-  function yesClicked() {
-    document.body.innerHTML = `
-      <div style="
-        background:linear-gradient(180deg,#ffd6e8,#ffeaf3);
-        height:100vh;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        font-family:Poppins;
-        text-align:center;
-      ">
-        <div>
-          <h1 style="color:#ff4d88;">YAYYY 💖🥰</h1>
-          <p>You just made my Valentine special 🐼💘</p>
-        </div>
-      </div>
-    `;
-  }
+  element.innerText = type.includes("Chocolate") ? "🍫" : "💐";
+  document.getElementById("reveal").innerText = `You chose ${type}`;
+
+  sendToDiscord(type);
+}
+
+/* Webhook sender */
+function sendToDiscord(choice) {
+  fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      content: `💝 Valentine Gift Selected: **${choice}**`
+    })
+  }).catch(() => {});
+}
+
+/* Optional NO modal */
+function openModal() {
+  alert("test");
+}
 </script>
 
 </body>
